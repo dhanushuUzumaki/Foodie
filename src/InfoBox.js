@@ -7,9 +7,9 @@ const InfoBox = (props) => {
     
     if (visible) {
         return (
-            <div style={{position: 'fixed', right: '0', marginTop: '1%', overflow: 'scroll'}}>
+            <div style={{position: 'absolute', right: '0', marginTop: '1.5%', overflow: 'scroll'}}>
                 <Container>
-                <Card style={{ width: '30rem' }}>
+                <Card style={{ width: '28rem' }}>
                   <Card.Img variant="top" src={marker.item.imageUrl} style={{height: '300px'}}/>
                   <Card.Body>
         <Card.Title>{marker.name} {marker.item.price !== undefined ? `- ${marker.item.price}` : ''}</Card.Title>

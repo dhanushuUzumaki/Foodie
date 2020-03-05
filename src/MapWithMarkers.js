@@ -164,16 +164,18 @@ class MapWithMarkers extends React.Component {
   render() {
     console.log(this.state)
     if (this.state.location != null) { return (
-      <Row>
-        {this.getMap()}
-        <Col xs={6} md={4}>
+      <div>
+        <div>
+          {this.getMap()}
+        </div>
+        <div>
           <InfoBox
             marker={this.state.activeMarker}
             onClose={this.onInfoWindowClose}
             visible={this.state.showingInfoWindow}
           />
-        </Col>
-      </Row> 
+        </div>
+      </div>          
     ) }
     else { return <div /> }
 
