@@ -5,6 +5,8 @@ import businessesData from '../data/businesses';
 import InfoBox from './InfoBox';
 import '../styles/MapWithMarkers.css';
 
+require('dotenv').config();
+
 const mockApi = true;
 
 class MapWithMarkers extends React.Component {
@@ -192,5 +194,5 @@ class MapWithMarkers extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyBNsZ8hy2MvqoEMEhBqligmk1CBpt1XCf0"
+  apiKey: process.env.GAPI_KEY
 })(MapWithMarkers);
