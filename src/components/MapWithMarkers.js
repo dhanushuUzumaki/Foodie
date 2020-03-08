@@ -7,7 +7,7 @@ import '../styles/MapWithMarkers.css';
 
 require('dotenv').config();
 
-const mockApi = true;
+const mockApi = process.env.MOCK_API;
 
 class MapWithMarkers extends React.Component {
 
