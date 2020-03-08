@@ -84,7 +84,7 @@ class MapWithMarkers extends React.Component {
       // TODO: Support pagination style requests
       axios({
         method: "GET",
-        url: 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search',
+        url: process.env.YELP_URL,
         params: {
           latitude,
           longitude,
@@ -92,7 +92,7 @@ class MapWithMarkers extends React.Component {
           sort_by: sortBy
         },
         headers: {
-          Authorization: `Bearer xb4gaUsgRiNZLm_4lT2qz78DZ4aijHPonhS-gd7WVwfpxVJbu8HBdOI-fKBqKjFGKuW2aG_F-ZCBBUfSHwr9_oApZtJyYUsiRqhaTfhstx5ndcUYOcQHCZrVnQVXXnYx`
+          Authorization: `Bearer ${process.env.YELP_API_KEY}`
         }
       }).then(r => {
         const businesses = this.parseBuisinessResponse(r.data);
