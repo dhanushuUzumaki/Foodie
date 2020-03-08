@@ -1,0 +1,14 @@
+#infobox {
+    position: absolute;
+    right: 0;
+    margin-top: 1.5%;
+    overflow: scroll;
+}
+
+.card {
+ width: 28rem;
+}
+
+img {
+    height: 300px;
+}

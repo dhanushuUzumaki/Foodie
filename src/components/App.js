@@ -7,7 +7,7 @@ class App extends React.Component {
         return (
             <div>
                 <h1>Foodie</h1>
-                <Form.Control size="lg" type="text" placeholder="Satisfy your carvings" />
+                <Form.Control size="lg" type="text" placeholder="Satisfy your cravings" />
                 <MapWithMarkers />               
             </div>);
     }

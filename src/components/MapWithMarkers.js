@@ -1,10 +1,11 @@
 import React from 'react';
-import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import axios from 'axios';
-import {Row, Col, Container} from 'react-bootstrap';
-import './App.css';
-import businessesData from './data/businesses';
+import businessesData from '../data/businesses';
 import InfoBox from './InfoBox';
+import '../styles/MapWithMarkers.css';
+
+const mockApi = true;
 
 class MapWithMarkers extends React.Component {
 
@@ -37,23 +38,23 @@ class MapWithMarkers extends React.Component {
       });
   };
 
-  parseBuisinessResponse = (data) => {    
-    const d = data.businesses.map(business => { 
+  parseBuisinessResponse = (data) => {
+    const d = data.businesses.map(business => {
       let {
-         id,
-         name,
-         image_url: imageUrl,
-         is_closed: isClosed,
-         review_count: reviewCount,
-         rating,
-         price,
-         phone,
-         display_phone: displayPhn,
-         distance,
-         coordinates
-        } = business,        
+        id,
+        name,
+        image_url: imageUrl,
+        is_closed: isClosed,
+        review_count: reviewCount,
+        rating,
+        price,
+        phone,
+        display_phone: displayPhn,
+        distance,
+        coordinates
+      } = business,
         supportsDelivery = business.transactions.indexOf('delivery') !== -1;
-        distance /= 1609; // converting to mile
+      distance /= 1609; // converting to mile
       return {
         id,
         name,
@@ -73,24 +74,31 @@ class MapWithMarkers extends React.Component {
   }
 
   getBusinesses = ({ latitude, longitude, limit, sortBy }) => {
-    // TODO: Support pagination style requests
-    // axios({
-    //   method: "GET",
-    //   url: 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search',
-    //   params: {
-    //     latitude,
-    //     longitude,
-    //     limit,
-    //     sort_by: sortBy
-    //   },
-    //   headers: {
-    //     Authorization: `Bearer xb4gaUsgRiNZLm_4lT2qz78DZ4aijHPonhS-gd7WVwfpxVJbu8HBdOI-fKBqKjFGKuW2aG_F-ZCBBUfSHwr9_oApZtJyYUsiRqhaTfhstx5ndcUYOcQHCZrVnQVXXnYx`
-    //   }
-    // }).then(r => {
+    if (mockApi) {
       const businesses = this.parseBuisinessResponse(businessesData);
-      this.setState({businesses});
-    // }).catch(e => console.error(e));
+      this.setState({ businesses });
+      return;
+    } else {
+      // TODO: Support pagination style requests
+      axios({
+        method: "GET",
+        url: 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search',
+        params: {
+          latitude,
+          longitude,
+          limit,
+          sort_by: sortBy
+        },
+        headers: {
+          Authorization: `Bearer xb4gaUsgRiNZLm_4lT2qz78DZ4aijHPonhS-gd7WVwfpxVJbu8HBdOI-fKBqKjFGKuW2aG_F-ZCBBUfSHwr9_oApZtJyYUsiRqhaTfhstx5ndcUYOcQHCZrVnQVXXnYx`
+        }
+      }).then(r => {
+        const businesses = this.parseBuisinessResponse(r.data);
+        this.setState({ businesses });
+      }).catch(e => console.error(e));
+    }
   }
+
 
   componentDidMount = () => {
     const success = (position) => {
@@ -116,22 +124,22 @@ class MapWithMarkers extends React.Component {
   }
 
   getBusinessMarkers() {
-    const {businesses} = this.state;
-    const {google} = this.props;
+    const { businesses } = this.state;
+    const { google } = this.props;
     return businesses.map(business => {
-      const {latitude:lat, longitude:lng} = business.coordinates;
-      return <Marker 
-            name={business.name}
-            key={business.id}
-            onClick={this.onMarkerClick}
-            position={{lat, lng}}
-            icon={{
-              url: business.imageUrl,
-              anchor: new google.maps.Point(0,32),
-              scaledSize: new google.maps.Size(64,64)
-            }}
-            item={business}
-        />;
+      const { latitude: lat, longitude: lng } = business.coordinates;
+      return <Marker
+        name={business.name}
+        key={business.id}
+        onClick={this.onMarkerClick}
+        position={{ lat, lng }}
+        icon={{
+          url: business.imageUrl,
+          anchor: new google.maps.Point(0, 32),
+          scaledSize: new google.maps.Size(64, 64)
+        }}
+        item={business}
+      />;
     });
   }
 
@@ -140,8 +148,7 @@ class MapWithMarkers extends React.Component {
       <Map
         className="map"
         google={this.props.google}
-        onClick={this.onMapClicked}
-        style={{ height: '75%', position: 'relative', width: '60%' }}
+        onClick={this.onMapClicked}        
         initialCenter={this.state.location}
         zoom={15}>
 
@@ -163,20 +170,22 @@ class MapWithMarkers extends React.Component {
 
   render() {
     console.log(this.state)
-    if (this.state.location != null) { return (
-      <div>
+    if (this.state.location != null) {
+      return (
         <div>
-          {this.getMap()}
+          <div>
+            {this.getMap()}
+          </div>
+          <div>
+            <InfoBox
+              marker={this.state.activeMarker}
+              onClose={this.onInfoWindowClose}
+              visible={this.state.showingInfoWindow}
+            />
+          </div>
         </div>
-        <div>
-          <InfoBox
-            marker={this.state.activeMarker}
-            onClose={this.onInfoWindowClose}
-            visible={this.state.showingInfoWindow}
-          />
-        </div>
-      </div>          
-    ) }
+      )
+    }
     else { return <div /> }
 
   }
