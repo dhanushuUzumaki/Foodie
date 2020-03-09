@@ -85,7 +85,7 @@ class MapWithMarkers extends React.Component {
       // TODO: Support pagination style requests
       axios({
         method: "GET",
-        url: "https://api.yelp.com/v3/businesses/search",
+        url: "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search",
         params: {
           latitude,
           longitude,
