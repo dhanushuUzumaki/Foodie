@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ceb72c127999ea0d743fabbe5b8a2b51",
+    "revision": "47895f061e46802a46c553c3cfd612a6",
     "url": "https://dhanushuuzumaki.github.io/Foodie/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://dhanushuuzumaki.github.io/Foodie/static/css/2.47e06e2e.chunk.css"
   },
   {
-    "revision": "550a12b40e73e8903752",
+    "revision": "0c4e66dd47049119a242",
     "url": "https://dhanushuuzumaki.github.io/Foodie/static/css/main.21af4b01.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://dhanushuuzumaki.github.io/Foodie/static/js/2.b3f1e5ab.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "550a12b40e73e8903752",
-    "url": "https://dhanushuuzumaki.github.io/Foodie/static/js/main.8a010b09.chunk.js"
+    "revision": "0c4e66dd47049119a242",
+    "url": "https://dhanushuuzumaki.github.io/Foodie/static/js/main.381f3f3c.chunk.js"
   },
   {
     "revision": "688eabfd65dbbd345fad",
