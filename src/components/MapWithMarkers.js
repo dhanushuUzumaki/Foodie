@@ -93,6 +93,7 @@ class MapWithMarkers extends React.Component {
           sort_by: sortBy
         },
         headers: {
+          // issues with injecting vars from trvavis
           Authorization: `Bearer xb4gaUsgRiNZLm_4lT2qz78DZ4aijHPonhS-gd7WVwfpxVJbu8HBdOI-fKBqKjFGKuW2aG_F-ZCBBUfSHwr9_oApZtJyYUsiRqhaTfhstx5ndcUYOcQHCZrVnQVXXnYx`
         }
       }).then(r => {
