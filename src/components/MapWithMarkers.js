@@ -1,3 +1,4 @@
+//TODO: replace API KEYS with env vars
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import axios from 'axios';
@@ -74,7 +75,6 @@ class MapWithMarkers extends React.Component {
   }
 
   getBusinesses = ({ latitude, longitude, limit, sortBy }) => {
-    console.log(process.env.MOCK_API);
     
     if (mockApi) {
       const businesses = this.parseBuisinessResponse(businessesData);
@@ -85,7 +85,7 @@ class MapWithMarkers extends React.Component {
       // TODO: Support pagination style requests
       axios({
         method: "GET",
-        url: process.env.YELP_URL,
+        url: "https://api.yelp.com/v3/businesses/search",
         params: {
           latitude,
           longitude,
@@ -93,7 +93,7 @@ class MapWithMarkers extends React.Component {
           sort_by: sortBy
         },
         headers: {
-          Authorization: `Bearer ${process.env.YELP_API_KEY}`
+          Authorization: `Bearer xb4gaUsgRiNZLm_4lT2qz78DZ4aijHPonhS-gd7WVwfpxVJbu8HBdOI-fKBqKjFGKuW2aG_F-ZCBBUfSHwr9_oApZtJyYUsiRqhaTfhstx5ndcUYOcQHCZrVnQVXXnYx`
         }
       }).then(r => {
         const businesses = this.parseBuisinessResponse(r.data);
@@ -186,5 +186,5 @@ class MapWithMarkers extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: process.env.GAPI_KEY
+  apiKey: "AIzaSyBNsZ8hy2MvqoEMEhBqligmk1CBpt1XCf0"
 })(MapWithMarkers);
