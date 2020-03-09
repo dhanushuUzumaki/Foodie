@@ -5,9 +5,7 @@ import businessesData from '../data/businesses';
 import InfoBox from './InfoBox';
 import '../styles/MapWithMarkers.css';
 
-require('dotenv').config();
-
-const mockApi = process.env.MOCK_API;
+const mockApi = false;
 
 class MapWithMarkers extends React.Component {
 
@@ -76,6 +74,8 @@ class MapWithMarkers extends React.Component {
   }
 
   getBusinesses = ({ latitude, longitude, limit, sortBy }) => {
+    console.log(process.env.MOCK_API);
+    
     if (mockApi) {
       const businesses = this.parseBuisinessResponse(businessesData);
       this.setState({ businesses });
@@ -154,18 +154,9 @@ class MapWithMarkers extends React.Component {
         initialCenter={this.state.location}
         zoom={15}>
 
-        <Marker name="Current location" onClick={this.onMarkerClick} />
+        <Marker name="current" onClick={this.onMarkerClick} />
 
         {this.getBusinessMarkers()}
-
-        {/* <InfoWindow
-          marker={this.state.activeMarker}
-          onClose={this.onInfoWindowClose}
-          visible={this.state.showingInfoWindow}>
-          <div>
-            <h1>{this.state.selectedPlace.name}</h1>
-          </div>
-        </InfoWindow> */}
       </Map>
     );
   }

@@ -6,7 +6,7 @@ const InfoBox = (props) => {
   const { visible, marker } = props;
   console.log(props);
 
-  if (visible) {
+  if (visible && marker.name !== 'current') {
     return (
       <div id="infobox">
         <Container>
