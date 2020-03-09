@@ -81,6 +81,7 @@ class MapWithMarkers extends React.Component {
       this.setState({ businesses });
       return;
     } else {
+      console.log(process.env.YELP_URL);
       // TODO: Support pagination style requests
       axios({
         method: "GET",
