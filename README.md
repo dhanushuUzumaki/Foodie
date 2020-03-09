@@ -13,6 +13,7 @@
 
 1. Support pagination style fetching of merchants. Currently a single request gets 50 merchants ordered by rating. 
 2. Currently API keys are statically present in the code due to some issues with variable injection during build. Need to update them.
+3. Add a spinner while map is loading.
 
 ## Future plans
 
@@ -31,3 +32,7 @@ Made using *create-react-app*
 ### Deployment
 
 Deployed to github pages, using travis CI. Deployment is done only for **master**.
+
+### Live Application
+
+![Screenshot of application](https://github.com/dhanushuUzumaki/Foodie/blob/master/public/Foodie.png?raw=true)
